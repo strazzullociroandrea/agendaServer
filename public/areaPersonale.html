@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Agenda Personale</title>
+    <script src="/socket.io/socket.io.js" type="module"></script>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/Login-Form-Basic-icons.css">
+    
+    <style>
+      table{
+        width: 100%;
+      }
+      .stamp{
+        height: calc(100vh - 160px);
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid mt-3">
+      <input type="button" value="logout" id="logout"/>
+      <form onsubmit="return false">
+        <input type="text" id="titolo" placeholder="Inserisci il titolo">
+        <input type="text" id="descrizione" placeholder="Inserisci la descrizione">
+        <select id="utenti">
+          
+        </select>
+        <div>
+          Utenti invitati:
+          <span id="userInv"></span>
+        </div>
+        
+        <input type="submit" id="creaEvento"/>
+      </form>
+      <div class="container-fluid">
+        <div class="row">
+          <div id="inviti" class="col-6">
+          </div>
+          
+          <div  class="col-6 border stamp">
+            <h3 class="m-4">I tuoi eventi</h3>
+            <span id="eventi"></span>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <script src="./areaPersonale.js" type="module"></script>
+  </body>
+</html>
