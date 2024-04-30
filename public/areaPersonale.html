@@ -14,12 +14,60 @@
         height: calc(100vh - 160px);
         overflow-y: auto;
       }
+      .navbar {
+        background-color: #ffffff;
+        border-bottom: 2px solid #dee2e6;
+        height: 8vh;
+      }
+      
+      .navbar-brand {
+        color: #000000; 
+        font-weight: bold; 
+      }
+      
+      .navbar-toggler {
+        border-color: #000000;
+      }
+      
+      .navbar-toggler-icon {
+        background-color: #000000;
+      }
+      
+      .navbar-nav .nav-link {
+        color: #000000;
+      }
+      
+      .corrente {
+        color: #007bff; 
+      }
+      body {
+        padding-top: 10vh; 
+      }
     </style>
   </head>
   <body>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-     aggiungi evento
-    </button>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top">
+        <div class="container-fluid">
+      <a class="navbar-brand">Area Personale</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link " href=""><span class="corrente">Home</span></a>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi evento</button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Il tuo profilo</a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </nav>
     <div class="container-fluid mt-3">
       <input type="button" value="logout" id="logout"/>
       
@@ -28,8 +76,8 @@
           <div id="inviti" class="col-6">
           </div>
           
-          <div  class="col-6 border stamp">
-            <h3 class="m-4">I tuoi eventi</h3>
+          <div  class="col-6 border stamp rounded">
+            <h3 class="m-4 ">I tuoi eventi</h3>
             <span id="eventi"></span>
           </div>
         </div>
@@ -42,29 +90,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Crea il tuo evento</h5>
       </div>
       <div class="modal-body">
         <form onsubmit="return false">
           <input type="text" id="titolo" placeholder="Inserisci il titolo">
           <input type="text" id="descrizione" placeholder="Inserisci la descrizione">
           <select id="utenti">
-            
           </select>
           <div>
             Utenti invitati:
             <span id="userInv"></span>
           </div>
-          
           <input type="submit" id="creaEvento"/>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

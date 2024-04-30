@@ -15,7 +15,7 @@ const creaSocket = () =>{
 }
 let socket = await creaSocket();
 const templateEvento = `
-<section class="py-4 py-xl-2">
+<section class="py-4 py-xl-2 rounded">
     <div class="container">
         <div class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5">
             <div class="row align-items-center justify-content-between">
