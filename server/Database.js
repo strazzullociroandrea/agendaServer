@@ -69,9 +69,8 @@ const Database = async (path) => {
                 if (user) {
                     const existingData = await Data.findOne({ where: { idUser: user.id, key: key } });
                     if (existingData) {
-                        let value = existingData.value;
-                        value = JSON.parse(value);
-                        value.push(val)
+                        let value = JSON.parse(existingData.dataValues.value);
+                        value.push(val);
                         value = JSON.stringify(value);
                         await existingData.update({ value: value });
                         return { result: "Dato modificato con successo" };
@@ -79,6 +78,7 @@ const Database = async (path) => {
                         let temp = [];
                         temp.push(val);
                         temp = JSON.stringify(temp);
+                        console.log(temp);
                         await Data.create({ key: key, value: temp, idUser: user.id });
                         return { result: "Dato inserito con successo" };
                     }
@@ -191,47 +191,33 @@ const Database = async (path) => {
                         email: email
                     }
                 });
-        
                 if (!user) {
                     return { login: "Utente non trovato" };
                 }
-        
                 const evento = await Data.findOne({
                     where: {
                         key: "eventi",
                         idUser: user.id
                     }
                 });
-        
                 if (!evento) {
                     return { login: "Evento non trovato" };
                 }
-        
-                const eventoTemp = JSON.parse(evento.value);
-        
+                let eventoTemp = JSON.parse(evento.value);
                 if (!eventoTemp[id]) {
                     return { login: "Evento non trovato" };
                 }
-        
-                console.log("eventoTemp[id]:");
-                console.log(eventoTemp[id]);
-        
                 // Rimuovi l'evento dall'oggetto eventoTemp
                 delete eventoTemp[id];
-        
                 // Filtra gli elementi nulli dall'array
-                const eventoFiltered = Object.fromEntries(
-                    Object.entries(eventoTemp).filter(([key, value]) => value !== null)
-                );
-        
+                eventoTemp = eventoTemp.filter(element => element != null && element);
                 // Aggiorna il valore JSON dell'evento nel database senza l'evento eliminato
-                await Data.update({ value: JSON.stringify(eventoFiltered) }, {
+                await Data.update({ value: JSON.stringify(eventoTemp) }, {
                     where: {
                         key: "eventi",
                         idUser: user.id
                     }
                 });
-        
                 return { success: true, message: "Evento eliminato con successo" };
             } catch (e) {
                 throw e;

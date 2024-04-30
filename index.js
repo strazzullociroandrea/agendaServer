@@ -37,6 +37,7 @@ const { Server } = require("socket.io");
       if (email && email !== "" && password && password !== "") {
         const rsp = await database.login(email, password);
         io.to(socket.id).emit("loginSuccess", rsp);
+        emailToSocketIdMap[email] = socket.id;
       }
     });
 
@@ -72,6 +73,7 @@ const { Server } = require("socket.io");
           email,
           idEvento
         );
+        console.log(emailToSocketIdMap[email]);
         io.to(socket.id).emit("completaSuccess", "ok");
       }
     });
